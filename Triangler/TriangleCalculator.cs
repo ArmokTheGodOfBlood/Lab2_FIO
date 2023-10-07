@@ -30,15 +30,15 @@ namespace Triangler
             float cLength = 0;
             if (float.TryParse(sideA, out float res))
             {
-                aLength = float.Parse(sideA);
+                aLength = Math.Abs(res);
             }
             if (float.TryParse(sideB, out res))
             {
-                bLength = float.Parse(sideB);
+                bLength = Math.Abs(res);
             }
             if (float.TryParse(sideC, out res))
             {
-                cLength = float.Parse(sideC);
+                cLength = Math.Abs(res);
             }
             return (aLength, bLength, cLength);
         }
@@ -69,6 +69,13 @@ namespace Triangler
         {
             (float x, float y) aCoordinates = (0, 0);
             (float x, float y) bCoordinates = (0, 0 + bLength);
+
+            if (aLength <= 0 || bLength <= 0 || cLength <= 0)
+                return new(int, int)[]{
+                (0, 0),
+                (0, 0),
+                (0, 0),
+            };
 
             (float x, float y) abVector = (
                 Convert.ToInt32((bCoordinates.x-aCoordinates.x) / cLength),

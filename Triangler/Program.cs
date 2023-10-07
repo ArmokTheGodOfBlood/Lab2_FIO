@@ -4,6 +4,6 @@ class Program
 {
     static void Main()
     {
-        TriangleCalculator.CalculateTriangle("3","5","3");
+        TriangleCalculator.CalculateTriangle("0","0","0");
     }
 }
