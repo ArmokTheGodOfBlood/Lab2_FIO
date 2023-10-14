@@ -70,12 +70,21 @@ namespace Triangler
             (float x, float y) aCoordinates = (0, 0);
             (float x, float y) bCoordinates = (0, 0 + bLength);
 
-            if (aLength <= 0 || bLength <= 0 || cLength <= 0)
-                return new(int, int)[]{
-                (0, 0),
-                (0, 0),
-                (0, 0),
-            };
+            if ((aLength is float.NaN || bLength is float.NaN || cLength is float.NaN) || (aLength <= 0 || bLength <= 0 || cLength <= 0))
+            {
+                return new (int, int)[]{
+                    (-2, -2),
+                    (-2, -2),
+                    (-2, -2),
+                };
+            } else if ((aLength == 0 || bLength == 0 || cLength == 0) || ((aLength + bLength < cLength) || (aLength + cLength < bLength) || (bLength + cLength < aLength)))
+            {
+                return new (int, int)[]{
+                    (-1, -1),
+                    (-1, -1),
+                    (-1, -1),
+                };
+            }
 
             (float x, float y) abVector = (
                 Convert.ToInt32((bCoordinates.x-aCoordinates.x) / cLength),
